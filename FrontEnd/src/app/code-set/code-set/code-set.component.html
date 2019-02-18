@@ -1,0 +1,81 @@
+<div class="module">
+  <div class="container-fluid">
+    <div class="module-heading">
+      Code Set Manager
+    </div>
+    <div class="module-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              Code Sets
+
+              <!-- "Pulled" button group -->
+              <div class="pull-right">
+                <button type="button" class="btn btn-success" (click)="add()">Add</button>
+              </div>
+
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+
+                  <!-- Input group (addon) -->
+                  <div class="form-group">
+                    <label class="form-control-label">Search</label>
+                    <div class="input-group">
+                      <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="searchExtracts()" name="searchTerm" placeholder="Search term..." #searchBox>
+                      <span class="input-group-append" (click)="searchExtracts()">
+                            <em class="fa fa-search input-group-text" title="Search"></em>
+                          </span>
+                      <span class="input-group-append" (click)="clearSearch()">
+                            <em class="fa fa-remove input-group-text" title="Clear search"></em>
+                           </span>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-md-12">
+                  <div class="scroll-box-450">
+
+                    <!-- Table -->
+                    <table class="table table-striped table-sm table-hover">
+                      <thead>
+                      <tr class="d-flex">
+                        <th class="col-1">Id</th>
+                        <th class="col-4">Name</th>
+                        <th class="col-1"></th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr class="d-flex show-child-on-hover" *ngFor="let codeSet of filteredCodeSets" (click)="selection = codeSet" [class.selection]="selection.id == codeSet.id">
+                        <td class="col-1">{{codeSet.id}}</td>
+                        <td class="col-4">{{codeSet.codeSetName}}</td>
+                        <td class="col-1"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              Code Set Detail
+
+              <!-- "Pulled" button group -->
+              <div class="pull-right">
+                <button type="button" class="btn btn-success" (click)="edit(selection)">Edit</button>
+                <button type="button" class="btn btn-danger" (click)="delete(selection)">Delete</button>
+              </div>
+
+            </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

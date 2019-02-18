@@ -1,0 +1,12 @@
+version: 0.0
+os: linux
+files:
+  - source: /frontend/dist
+    destination: //opt/tomcat/webapps/code-set-manager
+  - source: /api/target/api-1.0-SNAPSHOT
+    destination: //opt/tomcat/webapps/code-set-manager
+hooks:
+  BeforeInstall:
+    - location: aws_scripts/cleanup
+      timeout: 300
+      runas: root
