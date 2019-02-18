@@ -3,16 +3,7 @@
 ![Build Status](https://s3.eu-west-2.amazonaws.com/endeavour-codebuild/badges/skeleton/build.svg)
 ![Unit Tests](https://s3.eu-west-2.amazonaws.com/endeavour-codebuild/badges/skeleton/unit-test.svg)
 
-A skeleton project containing a fully working Java API and Angular UI allowing anyone to start developing quickly
-
-This is a fully working end to end sample including:
-
-* Keycloak integration for both the API and the Angular frontend.  
-* Dropwizard Metrics for all API calls  
-* Swagger integration for documentation of API calls  
-* Connects to the Config database to retrieve DB connection strings and Keycloak config
-
-**NOTE: If you are using a copy of this as a template for a new application, open the "TODO" window (IntelliJ) to see the list of application specific entries.**
+The Code Set Manager maintains the code sets being used by the Data Generator project.
 
 ## API Information  
 The project is setup as follows.
