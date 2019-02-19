@@ -29,6 +29,7 @@ public class CodeSetManagerLogic {
         String sctConceptIds;
 
         List<CodeSetEntity> codeSets = CodeSetEntity.getAllCodeSets();
+
         for (CodeSetEntity codeSet : codeSets) {
 
             codeSetCodes = CodeSetCodesEntity.getCodeSetCode(codeSet.getId());
@@ -47,7 +48,7 @@ public class CodeSetManagerLogic {
                         read2ConceptIds.indexOf(codeSetCodes.get(i).getRead2ConceptId()) == -1 ) {
 
                     jsonCodeSetCodes[i].setRead2ConceptId(codeSetCodes.get(i).getRead2ConceptId());
-                    read2ConceptIds += codeSetCodes.get(i).getRead2ConceptId() + ";";
+                    read2ConceptIds += codeSetCodes.get(i).getRead2ConceptId() + "; ";
                 }
 
                 if (codeSetCodes.get(i).getCtv3ConceptId() != null &&
@@ -55,14 +56,14 @@ public class CodeSetManagerLogic {
                         ctv3ConceptIds.indexOf(codeSetCodes.get(i).getCtv3ConceptId()) == -1 ) {
 
                     jsonCodeSetCodes[i].setCtv3ConceptId(codeSetCodes.get(i).getCtv3ConceptId());
-                    ctv3ConceptIds += codeSetCodes.get(i).getCtv3ConceptId() + ";";
+                    ctv3ConceptIds += codeSetCodes.get(i).getCtv3ConceptId() + "; ";
                 }
 
                 if (codeSetCodes.get(i).getSctConceptId() != null &&
                         codeSetCodes.get(i).getSctConceptId().length() > 0 &&
                         sctConceptIds.indexOf(codeSetCodes.get(i).getSctConceptId()) == -1 ) {
                     jsonCodeSetCodes[i].setSctConceptId(codeSetCodes.get(i).getSctConceptId());
-                    sctConceptIds += codeSetCodes.get(i).getSctConceptId() + ";";
+                    sctConceptIds += codeSetCodes.get(i).getSctConceptId() + "; ";
                 }
             }
 
@@ -82,8 +83,8 @@ public class CodeSetManagerLogic {
     }
 
     private static String trimLastChar(String value) {
-        if (value.endsWith(";")) {
-            value = value.substring(0, (value.length() - 1));
+        if (value.endsWith("; ")) {
+            value = value.substring(0, (value.length() - 2));
         }
         return value;
     }

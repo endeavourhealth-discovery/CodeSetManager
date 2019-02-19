@@ -39,7 +39,7 @@ export class CodeSetComponent implements OnInit {
       );
   }
 
-  searchExtracts() {
+  searchCodeSets() {
     this.filteredCodeSets = this.codeSets;
     this.filteredCodeSets = this.filteredCodeSets.filter(
       codeSet => codeSet.codeSetName.toUpperCase().includes(this.searchTerm.toUpperCase()));

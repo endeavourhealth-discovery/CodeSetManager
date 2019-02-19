@@ -3,10 +3,6 @@ package org.endeavourhealth.codesetmanager.models.database;
 import org.endeavourhealth.codesetmanager.PersistenceManager;
 
 import javax.persistence.*;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -56,7 +52,7 @@ public class CodeSetCodesEntity {
         return sctConceptId;
     }
 
-    public void setSctConceptId(String read2ConceptId) {
+    public void setSctConceptId(String sctConceptId) {
         this.sctConceptId = sctConceptId;
     }
 
@@ -81,16 +77,21 @@ public class CodeSetCodesEntity {
 
         EntityManager entityManager = PersistenceManager.getEntityManager();
 
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<CodeSetCodesEntity> query = builder.createQuery(CodeSetCodesEntity.class);
-        Root<CodeSetCodesEntity> root = query.from(CodeSetCodesEntity.class);
-        List<Predicate> predicates = new ArrayList();
-        predicates.add(builder.equal(root.get("codeSetId"), codeSetId));
-
-        query.where(predicates.toArray(new Predicate[0]));
-        TypedQuery<CodeSetCodesEntity> tq = entityManager.createQuery(query);
-        List<CodeSetCodesEntity> ret = tq.getResultList();
+        String sql = "select * from subscriber_transform_pcr.code_set_codes where code_set_id = " + codeSetId + ";";
+        Query query = entityManager.createNativeQuery(sql);
+        List<Object[]> list = query.getResultList();
         entityManager.close();
+
+        List<CodeSetCodesEntity> ret = new ArrayList<>(list.size());
+        CodeSetCodesEntity entity = null;
+        for (Object[] obj : list) {
+            entity = new CodeSetCodesEntity();
+            entity.setCodeSetId((Integer) obj[0]);
+            entity.setRead2ConceptId(obj[1].toString());
+            entity.setCtv3ConceptId(obj[2].toString());
+            entity.setSctConceptId(obj[3].toString());
+            ret.add(entity);
+        }
 
         return ret;
     }
