@@ -29,15 +29,14 @@ export class CodeSetComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('here1');
     this.service.getList()
       .subscribe(
         result => {
           this.codeSets = result;
+          this.selection = this.codeSets[0];
           this.filteredCodeSets = this.codeSets;
         },
       );
-    console.log('here2');
   }
 
   searchExtracts() {

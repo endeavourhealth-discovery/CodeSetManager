@@ -10,7 +10,7 @@
             <param-name>jersey.config.server.provider.packages</param-name>
             <param-value>io.swagger.jaxrs.listing,
                 org.endeavourhealth.coreui.endpoints,
-                org.endeavourhealth.codeSetManager.api.endpoints
+                org.endeavourhealth.codesetmanager.api.endpoints
             </param-value>
         </init-param>
         <init-param>

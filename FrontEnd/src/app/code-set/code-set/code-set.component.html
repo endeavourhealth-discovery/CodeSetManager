@@ -42,15 +42,15 @@
                     <table class="table table-striped table-sm table-hover">
                       <thead>
                       <tr class="d-flex">
-                        <th class="col-3">Id</th>
-                        <th class="col-8">Name</th>
+                        <th class="col-1">Id</th>
+                        <th class="col-10">Name</th>
                         <th class="col-1"></th>
                       </tr>
                       </thead>
                       <tbody>
                       <tr class="d-flex show-child-on-hover" *ngFor="let codeSet of filteredCodeSets" (click)="selection = codeSet" [class.selection]="selection.id == codeSet.id">
-                        <td class="col-3">{{codeSet.id}}</td>
-                        <td class="col-8">{{codeSet.codeSetName}}</td>
+                        <td class="col-1">{{codeSet.id}}</td>
+                        <td class="col-10">{{codeSet.codeSetName}}</td>
                         <td class="col-1"></td>
                       </tr>
                       </tbody>
