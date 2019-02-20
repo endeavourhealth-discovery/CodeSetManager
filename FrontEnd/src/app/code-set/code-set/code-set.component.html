@@ -25,7 +25,7 @@
                     <label class="form-control-label">Search</label>
                     <div class="input-group">
                       <input class="form-control" type="text" [(ngModel)]="searchTerm" (keyup)="searchCodeSets()" name="searchTerm" placeholder="Search term..." #searchBox>
-                      <span class="input-group-append" (click)="searchExtracts()">
+                      <span class="input-group-append" (click)="searchCodeSets()">
                             <em class="fa fa-search input-group-text" title="Search"></em>
                           </span>
                       <span class="input-group-append" (click)="clearSearch()">
@@ -36,7 +36,7 @@
 
                 </div>
                 <div class="col-md-12">
-                  <div class="table-responsive" style="overflow-y:scroll; min-height: 200px; max-height: 600px;">
+                  <div class="table-responsive" style="overflow-y:scroll; min-height: 500px; max-height: 500px;">
 
                     <!-- Table -->
                     <table class="table table-striped table-responsive-sm table-hover">
@@ -88,15 +88,15 @@
                         </div>
                         <div class="form-group">
                           <label class="control-label">Read Version 2 Codes</label>
-                          <textarea disabled class="form-control" [(ngModel)]="selection.read2ConceptIds" rows="3" name="read2ConceptIds" #read2ConceptIds></textarea>
+                          <textarea readonly class="form-control" [(ngModel)]="selection.read2ConceptIds" rows="3" name="read2ConceptIds" #read2ConceptIds></textarea>
                         </div>
                         <div class="form-group">
                           <label class="control-label">Clinical Terms Version 3</label>
-                          <textarea disabled class="form-control" [(ngModel)]="selection.ctv3ConceptIds" rows="3" name="ctv3ConceptIds" #ctv3ConceptIds></textarea>
+                          <textarea readonly class="form-control" [(ngModel)]="selection.ctv3ConceptIds" rows="3" name="ctv3ConceptIds" #ctv3ConceptIds></textarea>
                         </div>
                         <div class="form-group">
                           <label class="control-label">SNOMED CT</label>
-                          <textarea disabled class="form-control" [(ngModel)]="selection.sctConceptIds" rows="3" name="sctConceptIds" #sctConceptIds></textarea>
+                          <textarea readonly class="form-control" [(ngModel)]="selection.sctConceptIds" rows="3" name="sctConceptIds" #sctConceptIds></textarea>
                         </div>
                       </div>
                     </div>
