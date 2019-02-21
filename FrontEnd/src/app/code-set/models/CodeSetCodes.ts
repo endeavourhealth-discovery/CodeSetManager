@@ -4,8 +4,8 @@ export class CodeSetCodes {
   ctv3ConceptId: string;
   sctConceptId: string;
 
-  constructor() {
-    this.codeSetId = 0;
+  constructor(id: number) {
+    this.codeSetId = id;
     this.read2ConceptId = '';
     this.ctv3ConceptId = '';
     this.sctConceptId = '';

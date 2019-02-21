@@ -8,6 +8,7 @@ import { DialogsModule, LoggerService } from 'eds-angular4';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CodeSetService } from './code-set/code-set.service';
 import { ModuleStateService } from 'eds-angular4/dist/common';
+import { CodeSetEditorComponent } from './code-set-editor/code-set-editor.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { ModuleStateService } from 'eds-angular4/dist/common';
     ToastModule.forRoot(),
     ControlsModule
   ],
-  declarations: [CodeSetComponent],
+  declarations: [CodeSetComponent, CodeSetEditorComponent],
+  entryComponents: [CodeSetEditorComponent],
   providers: [CodeSetService, LoggerService, ModuleStateService]
 })
 export class CodeSetModule { }

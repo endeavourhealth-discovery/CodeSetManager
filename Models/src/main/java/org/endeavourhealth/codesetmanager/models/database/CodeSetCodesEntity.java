@@ -77,8 +77,8 @@ public class CodeSetCodesEntity {
 
         EntityManager entityManager = PersistenceManager.getEntityManager();
 
-        String sql = "select * from subscriber_transform_pcr.code_set_codes where code_set_id = " + codeSetId + ";";
-        Query query = entityManager.createNativeQuery(sql);
+        String sql = "select * from subscriber_transform_pcr.code_set_codes where code_set_id = :codeSetId";
+        Query query = entityManager.createNativeQuery(sql).setParameter("codeSetId", codeSetId);
         List<Object[]> list = query.getResultList();
         entityManager.close();
 
@@ -94,5 +94,18 @@ public class CodeSetCodesEntity {
         }
 
         return ret;
+    }
+
+    public static void deleteCodeSetCodes(int codeSetId) throws Exception {
+
+        EntityManager entityManager = PersistenceManager.getEntityManager();
+
+        String sql = "delete from subscriber_transform_pcr.code_set_codes where code_set_id = :codeSetId";
+        Query query = entityManager.createNativeQuery(sql).setParameter("codeSetId", codeSetId);
+
+        entityManager.getTransaction().begin();
+        query.executeUpdate();
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }

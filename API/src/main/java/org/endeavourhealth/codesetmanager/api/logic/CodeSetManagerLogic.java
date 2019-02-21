@@ -42,27 +42,25 @@ public class CodeSetManagerLogic {
             for (int i = 0; i < codeSetCodes.size(); i++) {
                 jsonCodeSetCodes[i] = new JsonCodeSetCodes();
                 jsonCodeSetCodes[i].setCodeSetId(codeSetCodes.get(i).getCodeSetId());
+                jsonCodeSetCodes[i].setRead2ConceptId(codeSetCodes.get(i).getRead2ConceptId());
+                jsonCodeSetCodes[i].setCtv3ConceptId(codeSetCodes.get(i).getCtv3ConceptId());
+                jsonCodeSetCodes[i].setSctConceptId(codeSetCodes.get(i).getSctConceptId());
 
                 if (codeSetCodes.get(i).getRead2ConceptId() != null &&
                         codeSetCodes.get(i).getRead2ConceptId().length() > 0 &&
                         read2ConceptIds.indexOf(codeSetCodes.get(i).getRead2ConceptId()) == -1 ) {
-
-                    jsonCodeSetCodes[i].setRead2ConceptId(codeSetCodes.get(i).getRead2ConceptId());
                     read2ConceptIds += codeSetCodes.get(i).getRead2ConceptId() + "; ";
                 }
 
                 if (codeSetCodes.get(i).getCtv3ConceptId() != null &&
                         codeSetCodes.get(i).getCtv3ConceptId().length() > 0 &&
                         ctv3ConceptIds.indexOf(codeSetCodes.get(i).getCtv3ConceptId()) == -1 ) {
-
-                    jsonCodeSetCodes[i].setCtv3ConceptId(codeSetCodes.get(i).getCtv3ConceptId());
                     ctv3ConceptIds += codeSetCodes.get(i).getCtv3ConceptId() + "; ";
                 }
 
                 if (codeSetCodes.get(i).getSctConceptId() != null &&
                         codeSetCodes.get(i).getSctConceptId().length() > 0 &&
                         sctConceptIds.indexOf(codeSetCodes.get(i).getSctConceptId()) == -1 ) {
-                    jsonCodeSetCodes[i].setSctConceptId(codeSetCodes.get(i).getSctConceptId());
                     sctConceptIds += codeSetCodes.get(i).getSctConceptId() + "; ";
                 }
             }
@@ -80,6 +78,11 @@ public class CodeSetManagerLogic {
         }
 
         return jsonCodeSets;
+    }
+
+    public void deleteCodeSet(String id) throws Exception {
+        CodeSetCodesEntity.deleteCodeSetCodes(Integer.valueOf(id));
+        CodeSetEntity.deleteCodeSet(Integer.valueOf(id));
     }
 
     private static String trimLastChar(String value) {

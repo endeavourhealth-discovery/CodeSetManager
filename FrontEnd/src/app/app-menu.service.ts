@@ -1,15 +1,17 @@
-import {Injectable} from '@angular/core';
-import {AbstractMenuProvider} from 'eds-angular4';
-import {MenuOption} from 'eds-angular4/dist/layout/models/MenuOption';
-import {CodeSetComponent} from './code-set/code-set/code-set.component';
-import {Routes} from '@angular/router';
+import { Injectable } from '@angular/core';
+import { AbstractMenuProvider } from 'eds-angular4';
+import { MenuOption } from 'eds-angular4/dist/layout/models/MenuOption';
+import { CodeSetComponent } from './code-set/code-set/code-set.component';
+import { Routes } from '@angular/router';
+import { CodeSetEditorComponent } from './code-set/code-set-editor/code-set-editor.component';
 
 @Injectable()
 export class AppMenuService implements  AbstractMenuProvider {
   static getRoutes(): Routes {
     return [
       { path: '', redirectTo : 'codeSetManager', pathMatch: 'full' }, // Default route
-      {path: 'codeSetManager', component: CodeSetComponent}
+      { path: 'codeSetManager', component: CodeSetComponent },
+      { path: 'codeSetEdit', component: CodeSetEditorComponent}
     ];
   }
   getApplicationTitle(): string {

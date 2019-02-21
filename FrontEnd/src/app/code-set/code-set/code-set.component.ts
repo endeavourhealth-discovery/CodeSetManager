@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { LoggerService } from 'eds-angular4';
+import { LoggerService, MessageBoxDialog } from 'eds-angular4';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CodeSetService } from './code-set.service';
 import { CodeSet } from '../models/CodeSet';
@@ -33,7 +33,11 @@ export class CodeSetComponent implements OnInit {
       .subscribe(
         result => {
           this.codeSets = result;
-          this.selection = this.codeSets[0];
+          if (this.service.getSelected()) {
+            this.selection = this.service.getSelected();
+          } else {
+            this.selection = this.codeSets[0];
+          }
           this.filteredCodeSets = this.codeSets;
         },
       );
@@ -52,14 +56,36 @@ export class CodeSetComponent implements OnInit {
   }
 
   add() {
-
+    this.state.setState('codeSetEdit', {extract: null, editMode: false});
+    this.router.navigate(['codeSetEdit']);
   }
 
   edit(item : CodeSet) {
-
+    this.service.setSelected(item);
+    this.state.setState('codeSetEdit', {extract: item, editMode: true});
+    this.router.navigate(['codeSetEdit']);
   }
 
   delete(item : CodeSet) {
+    this.service.setSelected(item);
+    MessageBoxDialog.open(this.modal, 'Delete Code Set', 'Are you sure that you want to delete <b>' +
+      item.codeSetName + '</b>?', 'Delete Code Set', 'Cancel')
+      .result.then(
+      () => this.doDelete(item),
+      () => this.log.info('Delete cancelled')
+    );
+  }
 
+  doDelete(item: CodeSet) {
+    this.service.delete(item.id)
+      .subscribe(
+        () => {
+          const index = this.codeSets.indexOf(item);
+          this.codeSets.splice(index, 1);
+          this.log.success('Code Set deleted successfully', item, 'Code Set');
+          this.selection = this.codeSets[0];
+        },
+        (error) => this.log.error('The Code Set could not be deleted. Please try again.', error, 'Delete Code Set')
+      );
   }
 }
