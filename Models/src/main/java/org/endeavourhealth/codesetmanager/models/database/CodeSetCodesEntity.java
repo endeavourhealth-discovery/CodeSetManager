@@ -1,6 +1,8 @@
 package org.endeavourhealth.codesetmanager.models.database;
 
 import org.endeavourhealth.codesetmanager.PersistenceManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "code_set_codes", schema = "subscriber_transform_pcr")
 public class CodeSetCodesEntity {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CodeSetCodesEntity.class);
 
     private int codeSetId;
     private String read2ConceptId;
@@ -94,6 +98,24 @@ public class CodeSetCodesEntity {
         }
 
         return ret;
+    }
+
+    public static void createCodeSetCodes(int codeSetId, ArrayList<CodeSetCodesEntity> codeSetCodes) throws Exception {
+
+        EntityManager entityManager = PersistenceManager.getEntityManager();
+
+        entityManager.getTransaction().begin();
+        for (CodeSetCodesEntity entity : codeSetCodes) {
+            String sql = "insert into subscriber_transform_pcr.code_set_codes values (:codeSetId, :read2ConceptId, :ctv3ConceptId, :sctConceptId);";
+            Query query = entityManager.createNativeQuery(sql).
+                    setParameter("codeSetId", codeSetId).
+                    setParameter("read2ConceptId", entity.read2ConceptId).
+                    setParameter("ctv3ConceptId", entity.ctv3ConceptId).
+                    setParameter("sctConceptId", entity.sctConceptId);
+            query.executeUpdate();
+        }
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public static void deleteCodeSetCodes(int codeSetId) throws Exception {

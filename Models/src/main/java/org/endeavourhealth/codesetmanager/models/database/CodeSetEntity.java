@@ -90,7 +90,7 @@ public class CodeSetEntity {
 
         EntityManager entityManager = PersistenceManager.getEntityManager();
 
-        String sql = "select max(id) from subscriber_transform_pcr.id;";
+        String sql = "select max(id) from subscriber_transform_pcr.code_set;";
         Query query = entityManager.createNativeQuery(sql);
         Integer result = (Integer) query.getSingleResult();
         codeSet.setId(result + 1);

@@ -21,7 +21,7 @@
                     </div>
                     <div class="form-group">
                       <label class="control-label required-field">Code Set Name</label>
-                      <input type="text" class="form-control" placeholder="Extract Name" [(ngModel)]="selection.codeSetName" name="codeSetName" #codeSetName>
+                      <input type="text" class="form-control" placeholder="Code Set Name" [(ngModel)]="selection.codeSetName" name="codeSetName" #codeSetName>
                     </div>
                     <div class="form-group">
                       <label class="control-label">Code Set Codes</label>&nbsp;&nbsp;&nbsp;
@@ -31,17 +31,23 @@
                       <table class="table table-bordered table-responsive-md table-striped text-center">
                         <thead>
                         <tr class="d-flex">
-                          <th class="col-3">Read Version 2 Codes</th>
-                          <th class="col-3">Clinical Terms Version 3</th>
+                          <th class="col-3 required-field">Read Version 2 Codes</th>
+                          <th class="col-3 required-field">Clinical Terms Version 3</th>
                           <th class="col-3">SNOMED CT</th>
                           <th class="col-3"></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="d-flex show-child-on-hover" *ngFor="let codeSetCode of selection.codeSetCodes">
-                          <td class="col-3" contenteditable="true" [(ngModel)]="codeSetCode.read2ConceptId" name="read2ConceptId">{{codeSetCode.read2ConceptId}}</td>
-                          <td class="col-3" contenteditable="true" [(ngModel)]="codeSetCode.ctv3ConceptId" name="ctv3ConceptId">{{codeSetCode.ctv3ConceptId}}</td>
-                          <td class="col-3" contenteditable="true" [(ngModel)]="codeSetCode.sctConceptId" name="sctConceptId">{{codeSetCode.sctConceptId}}</td>
+                        <tr class="d-flex show-child-on-hover" *ngFor="let codeSetCode of selection.codeSetCodes; let i = index;">
+                          <td class="col-3">
+                            <input type="text" class="form-control" placeholder="Read2" [(ngModel)]="codeSetCode.read2ConceptId" name="read2ConceptId{{i}}" #read2ConceptId>
+                          </td>
+                          <td class="col-3">
+                            <input type="text" class="form-control" placeholder="CTV3" [(ngModel)]="codeSetCode.ctv3ConceptId" name="ctv3ConceptId{{i}}" #ctv3ConceptId>
+                          </td>
+                          <td class="col-3">
+                            <input type="text" class="form-control" placeholder="SNOMED" [(ngModel)]="codeSetCode.sctConceptId" name="sctConceptId{{i}}" #sctConceptId>
+                          </td>
                           <td class="col-3">
                             <span class="table-remove">
                               <button type="button" class="btn btn-danger btn-rounded btn-sm my-0" (click)="remove(codeSetCode)">Remove</button>

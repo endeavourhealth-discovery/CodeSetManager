@@ -73,6 +73,7 @@ public class CodeSetManagerEndpoint {
         LOG.debug("Save CodeSet called");
 
         boolean isEdit = editMode.equals("1");
+        jsonCodeSet = new CodeSetManagerLogic().saveCodeSet(jsonCodeSet, isEdit);
 
         return Response
                 .ok()
